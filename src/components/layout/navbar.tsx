@@ -1,21 +1,16 @@
 "use client";
 
-import {  Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
-import {
-  Accordion,
-  
-} from "@/components/ui/accordion";
+import { Accordion } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
-  
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  
 } from "@/components/ui/navigation-menu";
 import {
   Sheet,
@@ -59,10 +54,10 @@ interface Navbar1Props {
 
 const Navbar = ({
   logo = {
-    url: "https://www.shadcnblocks.com",
+    url: "/",
     src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg",
     alt: "logo",
-    title: "Shadcnblocks.com",
+    title: "Next Blog",
   },
   menu = [
     { title: "Home", url: "/" },
@@ -72,21 +67,21 @@ const Navbar = ({
     },
     {
       title: "About",
-      url:"/about"
+      url: "/about",
     },
-      {
-      title: "Contact",
-      url:"#"
+    {
+      title: "Dashboard",
+      url: "/dashboard",
     },
   ],
   auth = {
     login: { title: "Login", url: "/login" },
-    signup: { title: "Sign up", url: "/register" },
+    signup: { title: "Register", url: "/register" },
   },
   className,
 }: Navbar1Props) => {
   return (
-    <section className={cn("py-4", className)}>
+    <section className={cn("py-4 ", className)}>
       <div className="container mx-auto px-4">
         {/* Desktop Menu */}
         <nav className="hidden items-center justify-between lg:flex">
@@ -111,7 +106,7 @@ const Navbar = ({
             </div>
           </div>
           <div className="flex gap-2">
-            <ModeToggle/>
+            <ModeToggle />
             <Button asChild variant="outline" size="sm">
               <Link href={auth.login.url}>{auth.login.title}</Link>
             </Button>
@@ -178,24 +173,19 @@ const Navbar = ({
 };
 
 const renderMenuItem = (item: MenuItem) => {
-
-
   return (
     <NavigationMenuItem key={item.title}>
       <NavigationMenuLink
         asChild
-        
         className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-accent-foreground"
       >
-       <Link href={item.url}> {item.title}</Link>
+        <Link href={item.url}>{item.title}</Link>
       </NavigationMenuLink>
     </NavigationMenuItem>
   );
 };
 
 const renderMobileMenuItem = (item: MenuItem) => {
-
-
   return (
     <Link key={item.title} href={item.url} className="text-md font-semibold">
       {item.title}
@@ -203,6 +193,4 @@ const renderMobileMenuItem = (item: MenuItem) => {
   );
 };
 
-
-
-export { Navbar};
+export { Navbar };
