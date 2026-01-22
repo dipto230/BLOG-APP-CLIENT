@@ -1,15 +1,33 @@
+"use client";
 
-import React from 'react'
-export const dynamic = 'force-dynamic'
 
-export default async function AboutPage() {
+import { getBlogs } from "@/actions/blog.action";
+import { useEffect, useState } from "react";
 
-  //for simulating load time
-await new Promise((resolve)=> setTimeout(resolve,4000))
+export default function AboutPage() {
+  const [data, setData] = useState();
+  const [error, setError] = useState<{ message: string } | null>(null);
 
-//for simulating error
-//throw new error("something went wrong")
+  console.log(data);
+  console.log(error);
+  useEffect(() => {
+    (async () => {
+      const { data, error } = await getBlogs();
+
+      setData(data);
+      setError(error);
+    })();
+  }, []);
+
   return (
-    <div>This is AboutPage coming from app</div>
-  )
+    <div>
+      <h1> This is about page component </h1>
+    </div>
+  );
 }
+
+//* For simulating load time
+// await new Promise((resolve) => setTimeout(resolve, 4000));
+
+//* For simulating error
+// throw new Error("Something went wrong");
