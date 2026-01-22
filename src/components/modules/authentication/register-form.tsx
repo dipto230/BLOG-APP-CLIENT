@@ -23,8 +23,9 @@ import * as z from "zod";
 
 const formSchema = z.object({
   name: z.string().min(1, "This field is required"),
-  password: z.string().min(8, "Minimum length is 8"),
   email: z.email(),
+  phone: z.string().min(10, "Phone number is required"),
+  password: z.string().min(8, "Minimum length is 8"),
 });
 
 export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
@@ -41,6 +42,7 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
     defaultValues: {
       name: "",
       email: "",
+      phone: "",
       password: "",
     },
     validators: {
@@ -102,6 +104,7 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
                 );
               }}
             />
+
             <form.Field
               name="email"
               children={(field) => {
@@ -124,6 +127,30 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
                 );
               }}
             />
+
+            <form.Field
+              name="phone"
+              children={(field) => {
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid;
+                return (
+                  <Field>
+                    <FieldLabel htmlFor={field.name}>Phone Number</FieldLabel>
+                    <Input
+                      type="tel"
+                      id={field.name}
+                      name={field.name}
+                      value={field.state.value}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                    />
+                    {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
+                  </Field>
+                );
+              }}
+            />
+
             <form.Field
               name="password"
               children={(field) => {
