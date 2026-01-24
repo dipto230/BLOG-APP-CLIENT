@@ -5,7 +5,8 @@ const nextConfig: NextConfig = {
   images: {
     domains: [
       "picsum.photos",
-      "example.com", // 👈 add this
+      "example.com",
+       "images.unsplash.com",
     ],
   },
 };
